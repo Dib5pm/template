@@ -1,11 +1,8 @@
-import Head from "next/head";
 import SessionReact from "supertokens-auth-react/recipe/session";
-import SuperTokensReact from "supertokens-auth-react";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import { signOut } from "supertokens-auth-react/recipe/thirdparty";
 
-import { recipeDetails } from "../config/frontendConfig";
 import { Button } from "components/ui/button";
+import DashboardPage from "components/dashboard";
 
 interface ILink {
   name: string;
@@ -15,11 +12,6 @@ interface ILink {
 
 function ProtectedPage() {
   const session = useSessionContext();
-
-  async function onLogout() {
-    await signOut();
-    window.location.href = "/";
-  }
 
   async function fetchUserData() {
     const res = await fetch("http://localhost:8000/sessioninfo");
@@ -33,29 +25,8 @@ function ProtectedPage() {
     return null;
   }
 
-  function openLink(url: string) {
-    window.open(url, "_blank");
-  }
-
-  const links: ILink[] = [
-    {
-      name: "Blogs",
-      onClick: () => openLink("https://supertokens.com/blog"),
-      icon: "",
-    },
-    {
-      name: "Guides",
-      onClick: () => openLink(recipeDetails.docsLink),
-      icon: "",
-    },
-  ];
-
   return (
-    <div>
-      <Head>
-        <title>SuperTokens 💫</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <DashboardPage>
       <div>
         <div>Login successful</div>
         <div>
@@ -63,9 +34,8 @@ function ProtectedPage() {
           <div>{session.userId}</div>
           <Button onClick={fetchUserData}>Call API</Button>
         </div>
-        <Button onClick={onLogout}>log out</Button>
       </div>
-    </div>
+    </DashboardPage>
   );
 }
 
