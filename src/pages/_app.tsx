@@ -1,22 +1,31 @@
-import "../styles/global.css";
-import { useEffect, FC } from "react";
-import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
+import type { AppProps } from "next/app";
+import { ReactElement, ReactNode, useEffect } from "react";
+import SuperTokensReact, {
+  SuperTokensWrapper,
+  redirectToAuth,
+} from "supertokens-auth-react";
 import * as SuperTokensConfig from "../config/frontendConfig";
-import Session from "supertokens-auth-react/recipe/session";
+import Session, { SessionAuth } from "supertokens-auth-react/recipe/session";
+import "../styles/global.css";
+import { NextPage } from "next";
 
 if (typeof window !== "undefined") {
   SuperTokensReact.init(SuperTokensConfig.frontendConfig());
 }
 
-interface MyAppProps {
-  Component: FC<any>; // Making Component prop generic
-  pageProps: {
-    fromSupertokens?: string;
-    [key: string]: any; // For additional props
-  };
-}
+export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
-const MyApp: FC<MyAppProps> = ({ Component, pageProps }) => {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const MyApp: React.FC<AppPropsWithLayout> = ({
+  Component,
+  pageProps,
+  router: { route },
+}) => {
   useEffect(() => {
     async function doRefresh() {
       if (pageProps.fromSupertokens === "needs-refresh") {
@@ -24,20 +33,21 @@ const MyApp: FC<MyAppProps> = ({ Component, pageProps }) => {
           location.reload();
         } else {
           // user has been logged out
-          SuperTokensReact.redirectToAuth();
+          redirectToAuth();
         }
       }
     }
     doRefresh();
   }, [pageProps.fromSupertokens]);
-
   if (pageProps.fromSupertokens === "needs-refresh") {
     return null;
   }
 
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <SuperTokensWrapper>
-      <Component {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
     </SuperTokensWrapper>
   );
 };

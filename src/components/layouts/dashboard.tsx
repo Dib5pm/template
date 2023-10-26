@@ -1,14 +1,13 @@
 import { Metadata } from "next";
 import Image from "next/image";
 
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { ReactNode } from "react";
-import { UserNav } from "./user.nav";
-import { Search } from "./search";
-import { MainNav } from "./main-nav";
-import TeamSwitcher from "./team-switcher";
+import { UserNav } from "../user.nav";
+import { MainNav } from "../main-nav";
+import TeamSwitcher from "../team-switcher";
+import SessionReact from "supertokens-auth-react/recipe/session";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -19,7 +18,9 @@ interface DashboardPageProps {
   children?: ReactNode;
 }
 
-const DashboardPage: React.FC<DashboardPageProps> = ({ children }) => {
+export const DashboardLayout: React.FunctionComponent<DashboardPageProps> = ({
+  children,
+}) => {
   return (
     <>
       <div className="md:hidden">
@@ -44,7 +45,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ children }) => {
             <TeamSwitcher />
             <MainNav className="mx-6" />
             <div className="ml-auto flex items-center space-x-4">
-              <Search />
               <UserNav />
             </div>
           </div>
@@ -56,27 +56,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ children }) => {
               <Button>Download</Button>
             </div>
           </div>
-          <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="analytics" disabled>
-                Analytics
-              </TabsTrigger>
-              <TabsTrigger value="reports" disabled>
-                Reports
-              </TabsTrigger>
-              <TabsTrigger value="notifications" disabled>
-                Notifications
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="overview" className="space-y-4">
-              {children}
-            </TabsContent>
-          </Tabs>
+          {children}
         </div>
       </div>
     </>
   );
 };
-
-export default DashboardPage;

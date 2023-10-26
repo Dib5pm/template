@@ -1,16 +1,14 @@
-import SessionReact from "supertokens-auth-react/recipe/session";
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
+import {
+  SessionAuth,
+  useSessionContext,
+} from "supertokens-auth-react/recipe/session";
 
 import { Button } from "components/ui/button";
-import DashboardPage from "components/dashboard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "components/ui/tabs";
+import { ReactElement } from "react";
+import { DashboardLayout } from "components/layouts/dashboard";
 
-interface ILink {
-  name: string;
-  onClick: () => void;
-  icon: string;
-}
-
-function ProtectedPage() {
+const Home = () => {
   const session = useSessionContext();
 
   async function fetchUserData() {
@@ -26,23 +24,40 @@ function ProtectedPage() {
   }
 
   return (
-    <DashboardPage>
-      <div>
-        <div>Login successful</div>
+    <Tabs defaultValue="overview" className="space-y-4">
+      <TabsList>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="analytics">Analytics</TabsTrigger>
+        <TabsTrigger value="reports" disabled>
+          Reports
+        </TabsTrigger>
+        <TabsTrigger value="notifications" disabled>
+          Notifications
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="overview" className="space-y-4"></TabsContent>
+      <TabsContent value="analytics" className="space-y-4">
         <div>
-          <div>Your userID is:</div>
-          <div>{session.userId}</div>
-          <Button onClick={fetchUserData}>Call API</Button>
+          <div>Login successful</div>
+          <div>
+            <div>Your userID is:</div>
+            <div>{session.userId}</div>
+            <Button className="mt-3" onClick={fetchUserData}>
+              Call API
+            </Button>
+          </div>
         </div>
-      </div>
-    </DashboardPage>
+      </TabsContent>
+    </Tabs>
   );
-}
+};
 
-export default function Home() {
+Home.getLayout = function getLayout(page: ReactElement) {
   return (
-    <SessionReact.SessionAuth>
-      <ProtectedPage />
-    </SessionReact.SessionAuth>
+    <SessionAuth>
+      <DashboardLayout>{page}</DashboardLayout>
+    </SessionAuth>
   );
-}
+};
+
+export default Home;
