@@ -8,6 +8,7 @@ import * as SuperTokensConfig from "../config/frontendConfig";
 import Session from "supertokens-auth-react/recipe/session";
 import "../styles/global.css";
 import { NextPage } from "next";
+import { Toaster } from "components/ui/toaster";
 
 if (typeof window !== "undefined") {
   SuperTokensReact.init(SuperTokensConfig.frontendConfig());
@@ -43,6 +44,7 @@ const MyApp: React.FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
 
   return (
     <SuperTokensWrapper>
+      <Toaster />
       {getLayout(<Component {...pageProps} />)}
     </SuperTokensWrapper>
   );

@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "module": "commonjs",
+    "module": "esnext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": false,
-    "target": "es2017",
+    "allowSyntheticDefaultImports": true,
+    "target": "esnext",
     "sourceMap": true,
     "outDir": "./dist",
     "incremental": true,
@@ -47,8 +47,9 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "tailwind.config.js"  ],
+    "**/*.tsx",
+    "tailwind.config.js"
+  ],
   "exclude": [
     "node_modules"
   ]
