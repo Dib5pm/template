@@ -34,9 +34,11 @@ export let frontendConfig = () => {
                     [data-supertokens~="privacyPolicyAndTermsAndConditions"] {
                       margin-top: 20px;
                       font-size: 12px;
+                      font-family: Inter, sans-serif;
                     }
                     [data-supertokens~="privacyPolicyAndTermsAndConditions"] a {
                       font-size: 12px;
+                      font-family: Inter, sans-serif;
                     }
                 `,
           providers: [ThirdPartyReact.Google.init()],

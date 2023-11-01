@@ -6,7 +6,7 @@ import {
 import { Button } from "components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "components/ui/tabs";
 import { ReactElement } from "react";
-import { DashboardLayout } from "components/layouts/dashboard";
+import { DashboardLayout } from "components/layouts/dashboard/dashboard";
 
 const Home = () => {
   const session = useSessionContext();

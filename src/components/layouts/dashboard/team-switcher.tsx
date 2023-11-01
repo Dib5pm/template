@@ -13,10 +13,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+} from "../../ui/dialog";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { Button } from "../../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import {
   Command,
   CommandEmpty,
@@ -25,11 +25,11 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "./ui/command";
+} from "../../ui/command";
 import { DialogDescription } from "@radix-ui/react-dialog";
-import { Label } from "./ui/label";
+import { Label } from "../../ui/label";
 
-import { Input } from "./ui/input";
+import { Input } from "../../ui/input";
 import axios from "axios";
 import { IOrganization } from "types";
 import {
@@ -37,9 +37,9 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip";
+} from "../../ui/tooltip";
 import { useEffect, useState } from "react";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../../ui/use-toast";
 import { getApiDomain } from "@/config/config";
 import { getFormattedDate } from "logic/getFormattedDate";
 
@@ -62,7 +62,7 @@ const TeamSwitcher: React.FC<TeamSwitcherProps> = ({
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const response = await axios.get(getApiDomain() + "/teams/");
+        const response = await axios.get(getApiDomain() + "/teams/get_teams");
         setTeams(response.data);
         setSelectedTeam(response.data[0]);
       } catch (error) {
@@ -140,7 +140,7 @@ const TeamSwitcher: React.FC<TeamSwitcherProps> = ({
             ) : (
               <Command>
                 <CommandList>
-                  <CommandInput placeholder="Search team..." />
+                  <CommandInput placeholder="Type a command or search..." />
                   {teams.length === 0 && (
                     <CommandEmpty>No team found.</CommandEmpty>
                   )}

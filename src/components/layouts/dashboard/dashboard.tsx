@@ -5,10 +5,10 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { ReactNode } from "react";
-import { UserNav } from "../user-nav";
-import { MainNav } from "../main-nav";
-import TeamSwitcher from "../team-switcher";
-import { Sidebar } from "components/side-bar";
+import { UserNav } from "../../user-nav";
+import { MainNav } from "./main-nav";
+import TeamSwitcher from "./team-switcher";
+import { Sidebar } from "components/layouts/dashboard/side-bar";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -104,7 +104,7 @@ export const DashboardLayout: React.FunctionComponent<DashboardPageProps> = ({
           {/* Separator */}
           <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
 
-          <div className="flex-1 flex items-center">
+          <div className=" flex items-center">
             <TeamSwitcher />
             <MainNav className="mx-6" />
           </div>

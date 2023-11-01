@@ -18,7 +18,7 @@ export function MainNav({
             router.pathname === "/" ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          Topics
+          Overview
         </a>
       </Link>
 

@@ -1,4 +1,4 @@
-import { DashboardLayout } from "components/layouts/dashboard";
+import { DashboardLayout } from "components/layouts/dashboard/dashboard";
 import { ReactElement } from "react";
 import { SessionAuth } from "supertokens-auth-react/recipe/session";
 

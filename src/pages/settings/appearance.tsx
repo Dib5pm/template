@@ -1,9 +1,9 @@
-import { DashboardLayout } from "components/layouts/dashboard";
+import { DashboardLayout } from "components/layouts/dashboard/dashboard";
 import { ReactElement } from "react";
 import { SessionAuth } from "supertokens-auth-react/recipe/session";
 
 import { Separator } from "components/ui/separator";
-import SettingsLayout from "components/settings/layout/settingsLayout";
+import SettingsLayout from "components/layouts/settings/settingsLayout";
 import { AccountForm } from "components/settings/account/account-form";
 import { AppearanceForm } from "components/settings/appearance/appearance-form";
 
