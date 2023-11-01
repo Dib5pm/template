@@ -12,6 +12,33 @@ export let frontendConfig = () => {
     recipeList: [
       ThirdPartyReact.init({
         signInAndUpFeature: {
+          termsOfServiceLink: "https://example.com/terms-of-service",
+          privacyPolicyLink: "https://example.com/privacy-policy",
+          style: `
+                    [data-supertokens="superTokensBranding"] {
+                        display: none;
+                    }
+                    [data-supertokens~=container] {
+                        font-family: Inter, sans-serif;
+                    }
+                    [data-supertokens="providerButtonText"] {
+                      font-family: Inter, sans-serif;
+                    }
+                    [data-supertokens="row"] {
+                      padding-bottom: 50px;
+                    }
+                    [data-supertokens~="headerTitle"] {
+                      letter-spacing: -0.42px;
+                      font-size: 20px;
+                    }
+                    [data-supertokens~="privacyPolicyAndTermsAndConditions"] {
+                      margin-top: 20px;
+                      font-size: 12px;
+                    }
+                    [data-supertokens~="privacyPolicyAndTermsAndConditions"] a {
+                      font-size: 12px;
+                    }
+                `,
           providers: [ThirdPartyReact.Google.init()],
         },
       }),

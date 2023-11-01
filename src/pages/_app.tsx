@@ -5,7 +5,7 @@ import SuperTokensReact, {
   redirectToAuth,
 } from "supertokens-auth-react";
 import * as SuperTokensConfig from "../config/frontendConfig";
-import Session, { SessionAuth } from "supertokens-auth-react/recipe/session";
+import Session from "supertokens-auth-react/recipe/session";
 import "../styles/global.css";
 import { NextPage } from "next";
 
@@ -21,11 +21,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp: React.FC<AppPropsWithLayout> = ({
-  Component,
-  pageProps,
-  router: { route },
-}) => {
+const MyApp: React.FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
   useEffect(() => {
     async function doRefresh() {
       if (pageProps.fromSupertokens === "needs-refresh") {

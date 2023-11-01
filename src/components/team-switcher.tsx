@@ -51,6 +51,7 @@ type PopoverTriggerProps = React.ComponentPropsWithoutRef<
 >;
 
 interface TeamSwitcherProps extends PopoverTriggerProps {}
+
 export default function TeamSwitcher({ className }: TeamSwitcherProps) {
   const [open, setOpen] = React.useState(false);
   const [showNewTeamDialog, setShowNewTeamDialog] = React.useState(false);
@@ -65,10 +66,11 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
       try {
         const response = await axios.get("http://localhost:8000/teams/");
         setTeams(response.data);
+        setSelectedTeam(response.data[0]);
       } catch (error) {
         console.error("An error occurred while fetching the teams:", error);
       } finally {
-        setLoading(false); // Set loading to false regardless of request outcome
+        setLoading(false);
       }
     };
 
@@ -185,28 +187,6 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
             <div className="space-y-2">
               <Label htmlFor="name">Team name</Label>
               <Input id="name" placeholder="Acme Inc." />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="plan">Subscription plan</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a plan" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="free">
-                    <span className="font-medium">Free</span> -{" "}
-                    <span className="text-muted-foreground">
-                      Trial for two weeks
-                    </span>
-                  </SelectItem>
-                  <SelectItem value="pro">
-                    <span className="font-medium">Pro</span> -{" "}
-                    <span className="text-muted-foreground">
-                      $9/month per user
-                    </span>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
         </div>

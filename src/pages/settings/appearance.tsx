@@ -3,8 +3,9 @@ import { ReactElement } from "react";
 import { SessionAuth } from "supertokens-auth-react/recipe/session";
 
 import { Separator } from "components/ui/separator";
-import { ProfileForm } from "components/settings/profile-form";
 import SettingsLayout from "components/settings/layout/settingsLayout";
+import { AccountForm } from "components/settings/account/account-form";
+import { AppearanceForm } from "components/settings/appearance/appearance-form";
 
 const SettingsProfilePage = () => {
   return (
@@ -17,7 +18,7 @@ const SettingsProfilePage = () => {
           </p>
         </div>
         <Separator />
-        <ProfileForm />
+        <AppearanceForm />
       </div>
     </SettingsLayout>
   );
