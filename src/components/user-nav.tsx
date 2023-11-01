@@ -15,6 +15,7 @@ import {
 import { signOut } from "supertokens-auth-react/recipe/thirdparty";
 import axios from "axios";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { getApiDomain } from "@/config/configSettings";
 export function UserNav() {
   const [userName, setUserName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
@@ -29,7 +30,9 @@ export function UserNav() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await axios.post("http://localhost:8000/get_user_info_api");
+        const res = await axios.post(
+          getApiDomain() + "/user/get_user_info_api"
+        );
         const userData = res.data;
 
         if (userData && userData.email) {

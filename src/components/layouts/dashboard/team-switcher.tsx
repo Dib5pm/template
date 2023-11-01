@@ -40,7 +40,7 @@ import {
 } from "../../ui/tooltip";
 import { useEffect, useState } from "react";
 import { useToast } from "../../ui/use-toast";
-import { getApiDomain } from "@/config/config";
+import { getApiDomain } from "@/config/configSettings";
 import { getFormattedDate } from "logic/getFormattedDate";
 
 interface TeamSwitcherProps
@@ -77,7 +77,7 @@ const TeamSwitcher: React.FC<TeamSwitcherProps> = ({
 
   async function handleContinueClick() {
     try {
-      const response = await axios.post(getApiDomain() + "/teams/", {
+      const response = await axios.post(getApiDomain() + "/teams/create_team", {
         team_name: teamName,
       });
 
